@@ -21,6 +21,13 @@ export class UsersService {
    .catch((err)=>console.log(err))
  }
 
+// search user by query
+async getAll(){
+  return this.userModel.find()
+  .then((user)=>{return user})
+  .catch((err)=>console.log(err))
+}
+
  // update the data
  async updateUser(id,data):Promise<User>{
    return this.userModel.findByIdAndUpdate(id,data,{new:true})

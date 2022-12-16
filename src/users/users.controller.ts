@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from '../schema/user.models';
 import { UserUpdateDto } from '../dto/userUpdate.dto';
@@ -11,11 +11,31 @@ export class UsersController {
       return this.usersService.createUser(userDto)
     }
   
+    // @Get()
+    // readUser(){
+    //   return this.usersService.readUser()
+    // }
+
     @Get()
-    readUser(){
-      return this.usersService.readUser()
+    findAll(@Query() query: UserUpdateDto)
+    {
+      return `This action return all Users (limit: ${query.limit} items)`;
     }
-  
+// @Get()
+// getAll(
+//   @Query('search') search: string,
+// @Query() query:any
+// ){
+//   console.log(query);
+//   const metadata = {search};
+//   return {
+//     message: 'search for user',
+//     data:[],
+//     metadata,
+//   };
+// }
+
+
     @Put(':id')
     async updateUser(
       @Param('id') id:string ,@Body() updateData:UserUpdateDto
